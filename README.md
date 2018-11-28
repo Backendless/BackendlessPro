@@ -21,10 +21,14 @@ To get started:
     * RT (Real Time) server (default port 5000)
    Each prompt will show the default port number, to accept it, simply press **Enter**, otherwise, enter a port number.
 1. When the command finishes, make sure Docker is running on your machine.
-1. Run Backendless Pro using the following command:
+1. Non Amazon Environments, Run Backendless Pro using the following command:
     ```
-    ./backendless_start.sh
+	./backendless_start.sh
     ```
+1. Amazon Enviornments, Run Backendless Pro using the following command:
+   ```
+   JAVA_ARGUMENTS="-Dweborb.subscriber.id=<subscriber_id> -Dweborb.emailaddress=mark@themidnightcoders.com -Daws.accessKeyId=<aws_access_key> -Daws.secretKey=<aws_secret_key>" ./backendless_start.sh
+   ```
 1. During the installation you may see some errors, for example:
     ```
     [INFO] WaiterService - SQL database 'main_backendless' is not accessible. Error message: Communications link failure
