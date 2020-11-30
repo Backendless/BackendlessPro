@@ -1,6 +1,6 @@
 USE `main_backendless`;
 
-INSERT INTO `Version` (`main`, `application`) values (34, 82);
+INSERT INTO `Version` (`main`, `application`) values (34, 83);
 
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('2', 'SUSPENDED');
@@ -480,6 +480,7 @@ CREATE TABLE IF NOT EXISTS `UserDataTable` (
                                                `originalName` VARCHAR(45) NULL,
                                                `isView` TINYINT(1) NOT NULL DEFAULT 0,
                                                `connectorId` VARCHAR(36) NULL DEFAULT NULL,
+                                               `metaInfo` json NULL,
                                                PRIMARY KEY (`id`),
                                                CONSTRAINT `fk_user_data_table_to_data_connector_id`
                                                    FOREIGN KEY (`connectorId`)
