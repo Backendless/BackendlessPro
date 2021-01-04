@@ -1,6 +1,6 @@
 USE `main_backendless`;
 
-INSERT INTO `Version` (`main`, `application`) values (34, 84);
+INSERT INTO `Version` (`main`, `application`) values (34, 85);
 
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('2', 'SUSPENDED');
@@ -1060,29 +1060,29 @@ CREATE TABLE IF NOT EXISTS `EmailSettings` (
 
 
 -- -----------------------------------------------------
--- Table `SocialUser`
+-- Table `OAuthUser`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `SocialUser` ;
+DROP TABLE IF EXISTS `OAuthUser` ;
 
-CREATE TABLE IF NOT EXISTS `SocialUser` (
-                                            `socialId` VARCHAR(100) NOT NULL,
+CREATE TABLE IF NOT EXISTS `OAuthUser` (
+                                            `oAuthId` VARCHAR(100) NOT NULL,
                                             `displayName` VARCHAR(100) NOT NULL,
                                             `userTypeId` INT NOT NULL DEFAULT 1,
                                             `userId` VARCHAR(100) NOT NULL,
                                             PRIMARY KEY (`userId`),
-                                            CONSTRAINT `fk_SocialUser_UserType1`
+                                            CONSTRAINT `fk_OAuthUser_UserType1`
                                                 FOREIGN KEY (`userTypeId`)
                                                     REFERENCES `UserType` (`id`)
                                                     ON DELETE NO ACTION
                                                     ON UPDATE NO ACTION,
-                                            CONSTRAINT `fk_SocialUser_User1`
+                                            CONSTRAINT `fk_OAuthUser_User1`
                                                 FOREIGN KEY (`userId`)
                                                     REFERENCES `User` (`id`)
                                                     ON DELETE CASCADE
                                                     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE INDEX `fk_SocialUser_UserType1_idx` ON `SocialUser` (`userTypeId` ASC);
+CREATE INDEX `fk_OAuthUser_UserType1_idx` ON `OAuthUser` (`userTypeId` ASC);
 
 
 -- -----------------------------------------------------
