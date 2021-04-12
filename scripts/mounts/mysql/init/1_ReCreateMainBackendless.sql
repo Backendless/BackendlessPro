@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS `main_backendless`.`ClusterZone` (
   `domain` VARCHAR(255) NOT NULL,
   `description` TEXT NULL,
   `iconURL` VARCHAR(500),
+  `apiEndpoint` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
