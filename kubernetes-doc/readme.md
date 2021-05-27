@@ -34,9 +34,9 @@ Follow the setup guide step-by-step in the order that is provided in the doc.
 - Initialize mysql DB with the following sql files https://github.com/Backendless/BackendlessPro/tree/master/scripts/mounts/mysql/init
 - Add `analytics`, `application_settings`, `push_templates` databases to the mongodb
 - [Initialize config map](#init_config_map)
-- [bl-consul](services/consul.md)
+- [Setup Consul](services/consul.md)
 - [Initialize config values](services/init_config_values.md)
-- [bl-hazelcast](services/hazelcast/4.0.x-4.1.x/hazelcast-4.x.md)
+- [Setup Hazelcast](services/hazelcast/4.0.x-4.1.x/hazelcast-4.x.md)
 - [Change configuration values](./first-configuration.md)
 - [Import `bl-server`](services/yml/bl-server.yml) change image version 
   and create folder on each node by the following path `/opt/backendless/logs/bl-server` before import
