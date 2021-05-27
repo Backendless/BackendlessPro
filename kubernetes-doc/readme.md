@@ -25,25 +25,25 @@ log_bin_trust_function_creators = 1
 ```
 notify-keyspace-events KEA
 ```
-- mongo 3.4.3
+- mongo 4+
 
 ###### Note: before import any yml file open it and make sure that there is correct mounts and backendless version
 
 Please follow setup guide step by step in the order that is provided in the doc
-- You should have shared file system mounted to all worker nodes
+- You should have shared file system mounted to all worker nodes to folder `/opt/backendless/shared`
 - Initialize mysql DB with the following sql files https://github.com/Backendless/BackendlessPro/tree/master/scripts/mounts/mysql/init
 - Add `analytics`, `application_settings`, `push_templates` databases to the mongodb
 - [Initialize config map](#init_config_map)
 - [bl-consul](services/consul.md)
 - [Initialize config values](services/init_config_values.md)
 - [bl-hazelcast](services/hazelcast/4.0.x-4.1.x/hazelcast-4.x.md)
-- [Change configuration values](../first-configuration.md)
+- [Change configuration values](first-configuration.md)
 - [Import `bl-server`](services/yml/bl-server.yml)
 - [Import `bl-taskman`](services/yml/bl-taskman.yml)
 - [Import `bl-coderunner-java`](services/yml/bl-coderunner-java.yml)
 - [Import `bl-coderunner-js`](services/yml/bl-coderunner-js.yml)
 - [Import `bl-web-console`](services/yml/bl-web-console.yml)
-- [Setup RT](../rt.md)
+- [Setup RT](rt.md)
 - [Setup domain](#setup_domains)
 - [Setup SMTP](#setup_smtp_server)
 - [Smoke test](../smoke_test.md)
