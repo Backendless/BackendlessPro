@@ -102,6 +102,6 @@ spec:
       terminationGracePeriodSeconds: 30
       volumes:
       - hostPath:
-          path: /opt/backendless/confs/rt-server/config.env
+          path: /opt/backendless/rt/config/config.env
           type: File
         name: rt-config-env-file

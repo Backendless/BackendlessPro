@@ -65,4 +65,6 @@ As a result you will able to see your config in the list
 - Create domain for API for example `api.my-domain.com` make sure that it is pointed to each k8s node where `bl-server` is running. The domain should be pointed to `32300` port
 - Create domain for Backendless console for example `dev.my-domain.com` make sure that it is pointed to each k8s node where `bl-web-console` is running. The domain should be pointed to `32400` port
 
+### <a name="setup_smtp_server">Setup  SMTP</a>
+Go to consul http://<k8s-node-ip>:32600/ui/#/dc1/kv/config/mail/settings/ and provide your smtp settings    
 

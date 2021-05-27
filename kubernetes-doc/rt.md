@@ -46,7 +46,7 @@ for `kube-worker-3`
 
 
 `config.env` file should be mounted to the service as persistence storage. Path in the service should be `/opt/backendless/config.env`. 
-[Rt server yml file](kubernetes/services/yml/bl-rt-server.yml) already contains the mount to the `/var/lib/backendless/config/config.env` file that is located
+[Rt server yml file](kubernetes/services/yml/bl-rt-server.yml) already contains the mount to the `/opt/backendless/rt/config/config.env` file that is located
 on the worker. 
 If you want to change the location of the file, do not forget to change the mount.
 
@@ -56,28 +56,7 @@ The following env variables rewrite following keys from consul
 
 Also there are additional variables that can rewrite consul variables:
 - `BL_RT_SERVER_CONNECTION_PROTOCOL` rewrites `config/rt-server/socketServer/connection-port`
-- `BL_RT_SERVER_CONNECTION_PORT` rewrites `config/rt-server/socketServer/connection-protocol` 
-
-***
-##### Add SSL certificate
-Generate SSL certificate for your domains. Or use `*.backendless.com` SSL certificate for backendless sub-domains
-```
-root@bel4-app1:/etc/nginx/ssl/backendless.com.key
-root@bel4-app1:/etc/nginx/ssl/backendless.com.crt
-```
-
-Copy those to `/var/lib/backendless/fs/cert/`. If the folder is not shared between all workers copy the files to each folder by the same path.
-It is better to locate certificates to the shared folder. 
-
-Add following keys to the consul
-- `config/rt-server/socketServer/ssl/certFile` with value `/opt/backendless/cert/backendless.com.crt`
-- `config/rt-server/socketServer/ssl/keyFile` with value `/opt/backendless/cert/backendless.com.key` 
-
-[Rt server yml file](kubernetes/services/yml/bl-rt-server.yml) already contains the mount of `/var/lib/backendless/fs/cert/` folder to `/opt/backendless/cert/`. 
-If you want to change location of the folder, do not forget to change the mount and consul values.
-
-
-***
+- `BL_RT_SERVER_CONNECTION_PORT` rewrites `config/rt-server/socketServer/connection-protocol`
   
 
 ##### Create `bl-rt-server`
