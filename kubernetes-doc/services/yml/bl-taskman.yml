@@ -70,9 +70,9 @@ spec:
         volumeMounts:
         - mountPath: /opt/backendless/repo
           name: repo
+        - mountPath: /opt/backendless/logs
+          name: logs
       dnsPolicy: ClusterFirst
-      imagePullSecrets:
-        - name: dockerhub-backendless
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}

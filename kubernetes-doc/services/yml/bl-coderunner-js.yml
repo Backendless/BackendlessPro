@@ -57,7 +57,7 @@ spec:
               key: BL_JS_CODE_RUNNER_MODE
               name: bl-env
               optional: false
-        image: backendless/bl-coderunner-js-cloud:     <--- provide version
+        image: backendless/bl-coderunner-js:     <--- provide version
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
@@ -96,8 +96,6 @@ spec:
         - mountPath: /opt/backendless/repo
           name: repo
       dnsPolicy: ClusterFirst
-      imagePullSecrets:
-        - name: dockerhub-backendless
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}

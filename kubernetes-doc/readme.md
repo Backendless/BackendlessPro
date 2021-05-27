@@ -38,11 +38,14 @@ Please follow setup guide step by step in the order that is provided in the doc.
 - [Initialize config values](services/init_config_values.md)
 - [bl-hazelcast](services/hazelcast/4.0.x-4.1.x/hazelcast-4.x.md)
 - [Change configuration values](./first-configuration.md)
-- [Import `bl-server`](services/yml/bl-server.yml) change image version before import
-- [Import `bl-taskman`](services/yml/bl-taskman.yml)  change image version before import
+- [Import `bl-server`](services/yml/bl-server.yml) change image version 
+  and create folder on each node by the following path `/opt/backendless/logs/bl-server` before import
+- [Import `bl-taskman`](services/yml/bl-taskman.yml)  change image version
+  and create folder on each node by the following path `/opt/backendless/logs/bl-taskman` before import
 - [Import `bl-coderunner-java`](services/yml/bl-coderunner-java.yml) change image version before import
 - [Import `bl-coderunner-js`](services/yml/bl-coderunner-js.yml) change image version before import
-- [Import `bl-web-console`](services/yml/bl-web-console.yml) change image version before import
+- [Import `bl-web-console`](services/yml/bl-web-console.yml) change image version
+  and create folder on each node by the following path ` /opt/backendless/logs/bl-web-console` before import
 - [Setup RT](./rt.md)
 - [Setup domain](#setup_domains)
 - [Setup SMTP](#setup_smtp_server)

@@ -95,8 +95,6 @@ spec:
         - mountPath: /opt/backendless/repo
           name: repo
       dnsPolicy: ClusterFirst
-#      imagePullSecrets:
-#        - name: registry-backendless
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
