@@ -1,6 +1,6 @@
 # Services setup
 
-Before setup services, please install and configure following applications:
+Before setup services, install and configure following applications:
 
 - rancher in HA mode 
 
@@ -11,7 +11,7 @@ collation-server = utf8mb4_unicode_520_ci
 sql-mode = '' # empty
 ```
 
-#### For Amazon RDS create parameter group and apply following:
+#### For Amazon RDS create parameter group and apply the following:
 
 ```
 character_set_server = utf8mb4
@@ -27,10 +27,10 @@ notify-keyspace-events KEA
 ```
 - mongo 4+
 
-###### Note: before import any yml file open it and make sure that there is correct mounts and backendless version
+###### Note: before importing an yml file, open it and make sure that there are correct mounts and the backendless version
 
-Please follow setup guide step by step in the order that is provided in the doc. 
-- You should have shared file system mounted to all worker nodes to folder `/opt/backendless/shared`
+Follow the setup guide step-by-step in the order that is provided in the doc. 
+- You should have a shared file system mounted to all worker nodes to folder `/opt/backendless/shared`
 - Initialize mysql DB with the following sql files https://github.com/Backendless/BackendlessPro/tree/master/scripts/mounts/mysql/init
 - Add `analytics`, `application_settings`, `push_templates` databases to the mongodb
 - [Initialize config map](#init_config_map)
