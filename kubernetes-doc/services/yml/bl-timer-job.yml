@@ -1,0 +1,63 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    field.cattle.io/creatorId: u-8dpmj
+  labels:
+    cattle.io/creator: norman
+  name: bl-timer-runner-job
+spec:
+  template:
+    spec:
+      containers:
+      - env:
+        - name: BL_CONFIG_PROVIDER
+          valueFrom:
+            configMapKeyRef:
+              key: BL_CONFIG_PROVIDER
+              name: bl-env
+        - name: BL_CONSUL_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: BL_CONSUL_HOST
+              name: bl-env
+        - name: BL_CONSUL_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: BL_CONSUL_PORT
+              name: bl-env
+        image: backendless/bl-server:5.7.3.11
+        imagePullPolicy: IfNotPresent
+        name: bl-timer-runner-job
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities: {}
+          privileged: false
+          procMount: Default
+          readOnlyRootFilesystem: false
+          runAsNonRoot: false
+        stdin: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        tty: true
+        volumeMounts:
+        - mountPath: /opt/backendless/start.sh
+          name: start
+        - mountPath: /opt/backendless/repo
+          name: repo
+      dnsPolicy: ClusterFirst
+      restartPolicy: Never
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /opt/backendless/shared/bl-timer/start.sh
+          type: ""
+        name: start
+      - hostPath:
+          path: /opt/backendless/shared/repo
+          type: ""
+        name: repo
+  backoffLimit: 4

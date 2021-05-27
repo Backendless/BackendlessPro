@@ -1,0 +1,52 @@
+filebeat:
+  inputs:
+    - paths:
+        - /opt/backendless/logs/bl-server/*.log
+      type: log
+      multiline.pattern: '^\['
+      multiline.negate: true
+      multiline.match: after
+      service: bl-server
+    - paths:
+        - /opt/backendless/logs/bl-coderunner-java/*.log
+      type: log
+      multiline.pattern: '^\['
+      multiline.negate: true
+      multiline.match: after
+      service: coderunner-java
+    - paths:
+        - /opt/backendless/logs/bl-taskman/*.log
+      type: log
+      service: taskman
+      multiline.pattern: '^\['
+      multiline.negate: true
+      multiline.match: after
+    - paths:
+        - /opt/backendless/logs/bl-web-console/*.log
+      type: log
+      multiline.pattern: '^\['
+      multiline.negate: true
+      multiline.match: after
+      service: web-console
+    - paths:
+        - /opt/backendless/logs/bl-limit/*.log
+      type: log
+      multiline.pattern: '^\['
+      multiline.negate: true
+      multiline.match: after
+      service: bl-limit
+    - paths:
+        - /opt/backendless/logs/bl-billing/*.log
+      type: log
+      multiline.pattern: '^\['
+      multiline.negate: true
+      multiline.match: after
+      service: bl-billing
+  registry:
+    path: /var/lib/filebeat/registry
+output:
+  logstash:
+    hosts: ["elk.dal01.backendless.com:5000"]
+    index: filebeat
+    bulk_max_size: 2048
+    

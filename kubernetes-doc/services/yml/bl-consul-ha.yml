@@ -1,0 +1,137 @@
+bapiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  annotations:
+    field.cattle.io/publicEndpoints: '[{"nodeName":"c-hvg2g:m-abf0e483f6ba","addresses":["91.134.127.224"],"port":8500,"protocol":"TCP","podName":"consul:consul-0","allNodes":false},{"nodeName":"c-hvg2g:m-c63f9c1d684c","addresses":["94.23.123.28"],"port":8500,"protocol":"TCP","podName":"consul:consul-1","allNodes":false},{"nodeName":"c-hvg2g:m-9b420df761a7","addresses":["94.23.123.158"],"port":8500,"protocol":"TCP","podName":"consul:consul-2","allNodes":false}]'
+    kubectl.kubernetes.io/last-applied-configuration: '{"apiVersion":"apps/v1","kind":"StatefulSet","metadata":{"annotations":{},"name":"consul","namespace":"consul"},"spec":{"replicas":3,"selector":{"matchLabels":{"app":"consul"}},"serviceName":"consul","template":{"metadata":{"labels":{"app":"consul"}},"spec":{"affinity":{"podAntiAffinity":{"requiredDuringSchedulingIgnoredDuringExecution":[{"labelSelector":{"matchExpressions":[{"key":"app","operator":"In","values":["consul"]}]},"topologyKey":"kubernetes.io/hostname"}]}},"containers":[{"args":["agent","-advertise=$(POD_IP)","-bind=0.0.0.0","-bootstrap-expect=3","-retry-join=consul-0.consul.$(NAMESPACE).svc.cluster.local","-retry-join=consul-1.consul.$(NAMESPACE).svc.cluster.local","-retry-join=consul-2.consul.$(NAMESPACE).svc.cluster.local","-client=0.0.0.0","-datacenter=london","-data-dir=/consul/data","-domain=cluster.local","-server","-ui","-disable-host-node-id"],"env":[{"name":"POD_IP","valueFrom":{"fieldRef":{"fieldPath":"status.podIP"}}},{"name":"NAMESPACE","valueFrom":{"fieldRef":{"fieldPath":"metadata.namespace"}}}],"image":"consul:1.7.2","lifecycle":{"preStop":{"exec":{"command":["/bin/sh","-c","consul
+      leave"]}}},"name":"consul","ports":[{"containerPort":8500,"name":"ui-port"},{"containerPort":8301,"name":"serflan"},{"containerPort":8302,"name":"serfwan"},{"containerPort":8600,"name":"consuldns"},{"containerPort":8300,"name":"server"}],"resources":{"limits":{"cpu":"200m","memory":"100Mi"},"requests":{"cpu":"100m","memory":"100Mi"}},"volumeMounts":[{"mountPath":"/consul/data","name":"data"}]}],"securityContext":{"fsGroup":1000},"volumes":[{"hostPath":{"path":"/opt/backendless/shared/consul/data","type":"DirectoryOrCreate"},"name":"data"},{"hostPath":{"path":"/opt/backendless/shared/consul/data","type":""},"name":"config"}]}}}}'
+  creationTimestamp: "2020-04-07T05:55:50Z"
+  generation: 7
+  name: consul
+  namespace: consul
+  resourceVersion: "551984"
+  selfLink: /apis/apps/v1/namespaces/consul/statefulsets/consul
+  uid: 8b7fbacf-e27a-4a53-9cca-c3f55dbbd101
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 3
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: consul
+  serviceName: consul
+  template:
+    metadata:
+      annotations:
+        cattle.io/timestamp: "2020-04-07T06:16:00Z"
+        field.cattle.io/ports: '[[{"containerPort":8500,"dnsName":"consul-nodeport","hostPort":8500,"kind":"NodePort","name":"ui-port","protocol":"TCP","sourcePort":32600},{"containerPort":8301,"dnsName":"consul","hostPort":0,"kind":"ClusterIP","name":"serflan","protocol":"TCP","sourcePort":0},{"containerPort":8302,"dnsName":"consul","hostPort":0,"kind":"ClusterIP","name":"serfwan","protocol":"TCP","sourcePort":0},{"containerPort":8600,"dnsName":"consul","hostPort":0,"kind":"ClusterIP","name":"consuldns","protocol":"TCP","sourcePort":0},{"containerPort":8300,"dnsName":"consul","hostPort":0,"kind":"ClusterIP","name":"server","protocol":"TCP","sourcePort":0}]]'
+      creationTimestamp: null
+      labels:
+        app: consul
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - consul
+            topologyKey: kubernetes.io/hostname
+      containers:
+      - args:
+        - agent
+        - -advertise=$(POD_IP)
+        - -bind=0.0.0.0
+        - -bootstrap-expect=3
+        - -retry-join=consul-0.consul.$(NAMESPACE).svc.cluster.local
+        - -retry-join=consul-1.consul.$(NAMESPACE).svc.cluster.local
+        - -retry-join=consul-2.consul.$(NAMESPACE).svc.cluster.local
+        - -client=0.0.0.0
+        - -datacenter=london
+        - -data-dir=/consul/data
+        - -domain=cluster.local
+        - -server
+        - -ui
+        - -disable-host-node-id
+        env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.podIP
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        image: consul:1.7.2
+        imagePullPolicy: IfNotPresent
+        lifecycle:
+          preStop:
+            exec:
+              command:
+              - /bin/sh
+              - -c
+              - consul leave
+        name: consul
+        ports:
+        - containerPort: 8500
+          hostPort: 8500
+          name: ui-port
+          protocol: TCP
+        - containerPort: 8301
+          name: serflan
+          protocol: TCP
+        - containerPort: 8302
+          name: serfwan
+          protocol: TCP
+        - containerPort: 8600
+          name: consuldns
+          protocol: TCP
+        - containerPort: 8300
+          name: server
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 200m
+            memory: 100Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        securityContext:
+          capabilities: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /consul/data
+          name: data
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 1000
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /opt/backendless/shared/consul/data
+          type: DirectoryOrCreate
+        name: data
+      - hostPath:
+          path: /opt/backendless/shared/consul/data
+          type: ""
+        name: config
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
+status:
+  collisionCount: 0
+  currentReplicas: 3
+  currentRevision: consul-56f4d78cbc
+  observedGeneration: 7
+  readyReplicas: 3
+  replicas: 3
+  updateRevision: consul-56f4d78cbc
+  updatedReplicas: 3

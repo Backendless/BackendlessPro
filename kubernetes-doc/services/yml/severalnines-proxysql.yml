@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: proxysql
+  labels:
+    app: proxysql
+spec:
+  replicas: 2
+  serviceName: proxysqlcluster
+  selector:
+    matchLabels:
+      app: proxysql
+      tier: frontend
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: proxysql
+        tier: frontend
+    spec:
+      restartPolicy: Always
+      containers:
+      - image: severalnines/proxysql:2.0.9
+        name: proxysql
+        volumeMounts:
+        - name: proxysql-config
+          mountPath: /etc/proxysql.cnf
+          subPath: proxysql.cnf
+        ports:
+        - containerPort: 6033
+          name: proxysql-mysql
+        - containerPort: 6032
+          name: proxysql-admin
+      volumes:
+      - name: proxysql-config
+        configMap:
+          name: proxysql-configmap
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+  labels:
+    app: proxysql
+    tier: frontend
+  name: proxysql
+spec:
+  ports:
+  - name: proxysql-mysql
+    port: 6033
+    protocol: TCP
+    targetPort: 6033
+  - name: proxysql-admin
+    nodePort: 30032
+    port: 6032
+    protocol: TCP
+    targetPort: 6032
+  selector:
+    app: proxysql
+    tier: frontend
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: proxysqlcluster
+  labels:
+    app: proxysql
+spec:
+  clusterIP: None
+  ports:
+    - port: 6032
+      name: proxysql-admin
+  selector:
+    app: proxysql
