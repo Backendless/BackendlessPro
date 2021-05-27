@@ -52,7 +52,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.hostIP
-        image: backendless/bl-rt-server:6.1.0.dev
+        image: backendless/bl-rt-server:     <--- provide version
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 5

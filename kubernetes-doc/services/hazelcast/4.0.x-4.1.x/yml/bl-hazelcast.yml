@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: bl-hazelcast-3125
-          image: backendless/bl-hazelcast:6.1.0.dev
+          image: backendless/bl-hazelcast:    <--- provide version
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5701

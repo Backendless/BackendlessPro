@@ -59,7 +59,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.hostIP
-        image: backendless/bl-upgrade:6.1.0.dev
+        image: backendless/bl-upgrade:     <--- provide version
         imagePullPolicy: Always
         name: bl-upgrade
         resources: {}

@@ -59,7 +59,7 @@ spec:
               key: BL_CONFIG_PROVIDER
               name: bl-env
               optional: false
-        image: backendless/bl-server-cloud:6.1.0.dev
+        image: backendless/bl-server-cloud:     <--- provide version
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 50

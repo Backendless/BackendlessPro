@@ -47,7 +47,7 @@ spec:
               fieldPath: status.hostIP
         - name: PORT
           value: "80"
-        image: backendless/bl-web-console:6.1.0.dev
+        image: backendless/bl-web-console:     <--- provide version
         imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 2

@@ -56,8 +56,7 @@ spec:
               key: BL_MANAGEMENT_HTTP_PORT
               name: bl-env
               optional: false
-        image: backendless/bl-coderunner-java:6.1.0.dev
-#        image: registry.backendless.com:5000/bl-coderunner-java:5.2.65
+        image: backendless/bl-coderunner-java: <--- provide version
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3

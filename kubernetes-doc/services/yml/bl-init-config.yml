@@ -18,7 +18,7 @@ spec:
       - env:
         - name: consulConfig
           value: '{"host": "bl-consul", "port": 8500}'
-        image: backendless/bl-config-loader:latest
+        image: backendless/bl-config-loader:     <--- provide version
         imagePullPolicy: IfNotPresent
         name: bl-init-config
         resources: {}

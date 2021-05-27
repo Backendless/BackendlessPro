@@ -29,7 +29,7 @@ notify-keyspace-events KEA
 
 ###### Note: before import any yml file open it and make sure that there is correct mounts and backendless version
 
-Please follow setup guide step by step in the order that is provided in the doc
+Please follow setup guide step by step in the order that is provided in the doc. 
 - You should have shared file system mounted to all worker nodes to folder `/opt/backendless/shared`
 - Initialize mysql DB with the following sql files https://github.com/Backendless/BackendlessPro/tree/master/scripts/mounts/mysql/init
 - Add `analytics`, `application_settings`, `push_templates` databases to the mongodb
@@ -38,18 +38,15 @@ Please follow setup guide step by step in the order that is provided in the doc
 - [Initialize config values](services/init_config_values.md)
 - [bl-hazelcast](services/hazelcast/4.0.x-4.1.x/hazelcast-4.x.md)
 - [Change configuration values](./first-configuration.md)
-- [Import `bl-server`](services/yml/bl-server.yml)
-- [Import `bl-taskman`](services/yml/bl-taskman.yml)
-- [Import `bl-coderunner-java`](services/yml/bl-coderunner-java.yml)
-- [Import `bl-coderunner-js`](services/yml/bl-coderunner-js.yml)
-- [Import `bl-web-console`](services/yml/bl-web-console.yml)
+- [Import `bl-server`](services/yml/bl-server.yml) change image version before import
+- [Import `bl-taskman`](services/yml/bl-taskman.yml)  change image version before import
+- [Import `bl-coderunner-java`](services/yml/bl-coderunner-java.yml) change image version before import
+- [Import `bl-coderunner-js`](services/yml/bl-coderunner-js.yml) change image version before import
+- [Import `bl-web-console`](services/yml/bl-web-console.yml) change image version before import
 - [Setup RT](./rt.md)
 - [Setup domain](#setup_domains)
 - [Setup SMTP](#setup_smtp_server)
 - [Smoke test](./smoke_test.md)
-
-- [Timer scheduler](services/timer.md)
-- Additional steps for [cloud setup](cloud-services-setup.md)
 
 
 ### <a name="init_config_map">Initialize config map</a>

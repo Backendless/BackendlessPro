@@ -25,5 +25,5 @@ Checkout the doc https://github.com/hazelcast/hazelcast-code-samples/tree/4.0.1/
 
 3. Create `bl-hazelcast` service
 - Press [Import YAML](../../img/import_yml.png) button
-- Copy and paste [bl-hazelcast](yml/bl-hazelcast.yml) yml file
+- Copy and paste [bl-hazelcast](yml/bl-hazelcast.yml) yml file, change image version before import
 - Press `Import` button

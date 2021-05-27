@@ -52,7 +52,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.hostIP
-        image: backendless/bl-server-cloud:6.0.0.stage
+        image: backendless/bl-server-cloud:     <--- provide version
         imagePullPolicy: IfNotPresent
         name: bl-taskman
         resources: {}
