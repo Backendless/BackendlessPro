@@ -24,7 +24,7 @@ services:
 
 
   bl-mysql:
-    image: mysql:5.7
+    image: mariadb:10
     hostname: bl-mysql
 
     environment:
@@ -42,7 +42,7 @@ services:
 
 
   bl-mongo:
-    image: mongo:3.4.3
+    image: mongo:4
     hostname: bl-mongo
 
     #environment:
