@@ -24,11 +24,12 @@ services:
 
 
   bl-mysql:
-    image: mariadb:10
+    image: mysql/mysql-server:8.0
     hostname: bl-mysql
 
     environment:
     - MYSQL_ROOT_PASSWORD=rootpassword
+    - MYSQL_ROOT_HOST=%
     command: --lower_case_table_names=0 --sql-mode=""
 
     ports:
