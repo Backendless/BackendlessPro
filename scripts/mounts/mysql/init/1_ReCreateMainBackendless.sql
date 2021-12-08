@@ -398,6 +398,7 @@ CREATE TABLE `main_backendless`.`FlowElement` (
   `flowId` varchar(100) NOT NULL,
   `groupId` varchar(100) NULL,
   `metaInfo` JSON NULL,
+  `consoleMetaInfo` JSON NULL,
   `created` datetime DEFAULT NULL,
   `updated` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
