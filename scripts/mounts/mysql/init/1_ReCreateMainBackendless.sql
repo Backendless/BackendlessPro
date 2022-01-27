@@ -117,6 +117,7 @@ CREATE TABLE IF NOT EXISTS `main_backendless`.`Developer` (
   `email` VARCHAR(45) NOT NULL,
   `password` VARCHAR(60) NULL,
   `developerStatusId` VARCHAR(100) NOT NULL,
+  `chargifyCustomerId` VARCHAR(100) NULL,
   `lastLogin` DATETIME NULL,
   `registrationDate` DATETIME NULL,
   `companyName` VARCHAR(45) NULL,
