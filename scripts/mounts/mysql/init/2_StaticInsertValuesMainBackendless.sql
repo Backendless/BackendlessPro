@@ -1,16 +1,16 @@
 USE `main_backendless`;
 
-INSERT INTO `Version` (`main`, `application`) values (49, 100);
+INSERT INTO `Version` (`main`, `application`) values (52, 101);
 
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('2', 'SUSPENDED');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('3', 'INVITED');
 
 INSERT INTO `DeveloperOperation` VALUES ('1','INVITE_REMOVE_TEAM_MEMBER');
-INSERT INTO `DeveloperOperation` VALUES ('10','ENABLE_DISABLE_GIT');
 INSERT INTO `DeveloperOperation` VALUES ('102','STORED_PROCEDURE');
 INSERT INTO `DeveloperOperation` VALUES ('106','VIEW_DIRECTORY_CONTENT');
 INSERT INTO `DeveloperOperation` VALUES ('11','DELETE_APPLICATION');
+INSERT INTO `DeveloperOperation` VALUES ('110','RENAME_APPLICATION');
 INSERT INTO `DeveloperOperation` VALUES ('13','APP_RESET');
 INSERT INTO `DeveloperOperation` VALUES ('14','CHANGE_LIMIT_NOTIFICATION');
 INSERT INTO `DeveloperOperation` VALUES ('17','CHANGE_LOG_CONFIG');
