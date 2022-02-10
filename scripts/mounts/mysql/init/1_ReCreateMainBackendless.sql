@@ -60,6 +60,7 @@ CREATE TABLE IF NOT EXISTS `main_backendless`.`AppCustomDomain` (
   `generated` BOOLEAN NOT NULL DEFAULT 0,
   `useSSL` BOOLEAN NOT NULL DEFAULT 0,
   `useForFileUrls` BOOLEAN NOT NULL DEFAULT 0,
+  `webFolder` VARCHAR(100) NOT NULL DEFAULT 'web',
   PRIMARY KEY (`id`),
   KEY `fk_AppCustomDomain_ClusterZone` (`zoneId`),
   CONSTRAINT `fk_AppCustomDomain_ClusterZone`

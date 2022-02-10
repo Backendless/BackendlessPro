@@ -1,6 +1,6 @@
 USE `main_backendless`;
 
-INSERT INTO `Version` (`main`, `application`) values (52, 100);
+INSERT INTO `Version` (`main`, `application`) values (54, 101);
 
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('2', 'SUSPENDED');
@@ -62,6 +62,8 @@ INSERT INTO `DeveloperOperation` VALUES ('99','CREATE_MODIFY_DELETE_DATA_CONNECT
 INSERT INTO `DeveloperOperation` VALUES ('107','LOGOUT_ALL_USERS');
 INSERT INTO `DeveloperOperation` VALUES ('108','CREATE_BLUE_PRINT');
 INSERT INTO `DeveloperOperation` VALUES ('109','MODIFY_COLUMNS_VISIBILITY');
+INSERT INTO `DeveloperOperation` VALUES ('111','UI_BUILDER_PUBLISH_CONTAINER');
+INSERT INTO `DeveloperOperation` VALUES ('112','UI_BUILDER_PUBLISH_TO_MARKETPLACE');
 
 
 INSERT INTO `main_backendless`.`ClusterZone` VALUES (1, 'Main', 'Main Cluster', 'backendless.local', 'http://backendless.local:9000', null, null);
