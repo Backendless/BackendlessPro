@@ -10,6 +10,7 @@ INSERT INTO `DeveloperOperation` VALUES ('1','INVITE_REMOVE_TEAM_MEMBER');
 INSERT INTO `DeveloperOperation` VALUES ('102','STORED_PROCEDURE');
 INSERT INTO `DeveloperOperation` VALUES ('106','VIEW_DIRECTORY_CONTENT');
 INSERT INTO `DeveloperOperation` VALUES ('11','DELETE_APPLICATION');
+INSERT INTO `DeveloperOperation` VALUES ('110','RENAME_APPLICATION');
 INSERT INTO `DeveloperOperation` VALUES ('13','APP_RESET');
 INSERT INTO `DeveloperOperation` VALUES ('14','CHANGE_LIMIT_NOTIFICATION');
 INSERT INTO `DeveloperOperation` VALUES ('17','CHANGE_LOG_CONFIG');
@@ -61,6 +62,7 @@ INSERT INTO `DeveloperOperation` VALUES ('99','CREATE_MODIFY_DELETE_DATA_CONNECT
 INSERT INTO `DeveloperOperation` VALUES ('107','LOGOUT_ALL_USERS');
 INSERT INTO `DeveloperOperation` VALUES ('108','CREATE_BLUE_PRINT');
 INSERT INTO `DeveloperOperation` VALUES ('109','MODIFY_COLUMNS_VISIBILITY');
+INSERT INTO `DeveloperOperation` VALUES ('111','PUBLISH_UI_CONTAINERS');
 
 
 INSERT INTO `main_backendless`.`ClusterZone` VALUES (1, 'Main', 'Main Cluster', 'backendless.local', 'http://backendless.local:9000', null, null);
