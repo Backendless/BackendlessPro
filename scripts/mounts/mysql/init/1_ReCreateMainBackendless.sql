@@ -124,7 +124,8 @@ CREATE TABLE IF NOT EXISTS `main_backendless`.`Developer` (
   `companyName` VARCHAR(45) NULL,
   `phone` VARCHAR(45) NULL,
   `system` TINYINT(1) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`),
+  `metaInfo` json DEFAULT NULL,
+    PRIMARY KEY (`id`),
   INDEX `fk_Developer_DeveloperStatus1_idx` (`developerStatusId` ASC),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC),
   CONSTRAINT `fk_Developer_DeveloperStatus1`
