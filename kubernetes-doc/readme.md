@@ -52,6 +52,9 @@ Follow the setup guide step-by-step in the order that is provided in the doc.
 - [Smoke test](./smoke_test.md)
 - [Advanced configuration](./advanced.md)
 
+---
+- [Services upgrade](./services/services-upgrade.md)
+
 
 ### <a name="init_config_map">Initialize config map</a>
 - Press `Import YAML` button
