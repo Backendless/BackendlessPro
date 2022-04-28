@@ -1,10 +1,11 @@
 USE `main_backendless`;
 
-INSERT INTO `Version` (`main`, `application`) values (55, 101);
+INSERT INTO `Version` (`main`, `application`) values (58, 102);
 
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('2', 'SUSPENDED');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('3', 'INVITED');
+INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('4', 'PANIC');
 
 INSERT INTO `DeveloperOperation` VALUES ('1','INVITE_REMOVE_TEAM_MEMBER');
 INSERT INTO `DeveloperOperation` VALUES ('102','STORED_PROCEDURE');
@@ -473,8 +474,8 @@ DROP TABLE IF EXISTS `UserDataTable` ;
 
 CREATE TABLE IF NOT EXISTS `UserDataTable` (
     `id` VARCHAR(100) NOT NULL,
-    `name` VARCHAR(45) NOT NULL,
-    `originalName` VARCHAR(45) NULL,
+    `name` VARCHAR(174) NOT NULL,
+    `originalName` VARCHAR(128) NULL,
     `isView` TINYINT(1) NOT NULL DEFAULT 0,
     `connectorId` VARCHAR(36) NULL DEFAULT NULL,
     `metaInfo` json NULL,
@@ -498,8 +499,8 @@ DROP TABLE IF EXISTS `UserDataTableColumn` ;
 
 CREATE TABLE IF NOT EXISTS `UserDataTableColumn` (
     `id` VARCHAR(100) NOT NULL,
-    `name` VARCHAR(45) NULL,
-    `originalName` VARCHAR(45) NULL,
+    `name` VARCHAR(64) NULL,
+    `originalName` VARCHAR(64) NULL,
     `dataColumnTypeId` VARCHAR(100) NOT NULL,
     `userDataTableId` VARCHAR(100) NOT NULL,
     `defaultValue` VARCHAR(500) NULL,
