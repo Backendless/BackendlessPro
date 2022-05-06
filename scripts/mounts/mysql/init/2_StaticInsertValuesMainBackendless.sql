@@ -1,6 +1,6 @@
 USE `main_backendless`;
 
-INSERT INTO `Version` (`main`, `application`) values (59, 103);
+INSERT INTO `Version` (`main`, `application`) values (59, 104);
 
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('2', 'SUSPENDED');
@@ -848,7 +848,7 @@ CREATE TABLE IF NOT EXISTS `EmailSettings` (
     `smtpPort` INT NULL,
     `protocol` INT NOT NULL DEFAULT 1,
     `userid` VARCHAR(255) NULL,
-    `password` VARCHAR(100) NULL,
+    `password` VARCHAR(200) NULL,
     `sentFrom` VARCHAR(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
     `emailFrom` VARCHAR(45) NULL,
     PRIMARY KEY (`id`))
