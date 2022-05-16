@@ -4,7 +4,7 @@ Before setup services, install and configure following applications:
 
 - rancher in HA mode https://rancher.com/docs/rancher/v2.5/en/installation/install-rancher-on-k8s/
 
-- mysql 5.7 it should contains the following config:
+- mysql 8 it should contains the following config:
 ```
 character-set-server = utf8mb4
 collation-server = utf8mb4_unicode_520_ci
