@@ -795,6 +795,7 @@ CREATE TABLE IF NOT EXISTS `OAuth2Provider`
     `userInfoUrls`        JSON NOT NULL,
     `tenantBased`         boolean NOT NULL DEFAULT '0',
     `tenantDomain`        varchar(255),
+    `editedInAdvancedMode` boolean NOT NULL DEFAULT '0',
     PRIMARY KEY (`id`),
     UNIQUE KEY `name_UNIQUE` (`name`),
     UNIQUE KEY `code_UNIQUE` (`code`)
