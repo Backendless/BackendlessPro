@@ -5,7 +5,7 @@ Check out the logs of the job to make sure that everything is ok. Then remove th
 ### Services upgrade
 Go to rancher and change version for all backendless services to the version that you need and press deploy button.
 
-### Upgrade from version > 6.5.3
+### Upgrade from version > 6.6.1
 We have changed hazelcast cache to infinispan. To upgrade use the following command to create infinispan service (change default to your namespace):
 ```
 kubectl apply -f infinispan.yaml
