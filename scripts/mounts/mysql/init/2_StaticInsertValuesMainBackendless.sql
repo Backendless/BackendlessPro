@@ -821,9 +821,9 @@ CREATE TABLE IF NOT EXISTS `OAuth1Provider`
 
 
 -- -----------------------------------------------------
--- Table `Auth0UserBinding`
+-- Table `Auth0UserToUser`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Auth0UserBinding`
+CREATE TABLE IF NOT EXISTS `Auth0UserToUser`
 (
     `auth0UserId`     VARCHAR(100) NOT NULL,
     `userId`          VARCHAR(100) NOT NULL,
@@ -832,16 +832,16 @@ CREATE TABLE IF NOT EXISTS `Auth0UserBinding`
 
 
 -- -----------------------------------------------------
--- Table `Auth0ScopeToRoleBinding`
+-- Table `Auth0ScopeToRole`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Auth0ScopeToRoleBinding`
+CREATE TABLE IF NOT EXISTS `Auth0ScopeToRole`
 (
     `id`              VARCHAR(100) NOT NULL,
     `roleId`          VARCHAR(100) NOT NULL,
     `clientScope`     VARCHAR(255) NOT NULL,
     `enabled`         BOOLEAN NOT NULL,
     PRIMARY KEY (`id`),
-    CONSTRAINT `fk_Auth0ScopeToRoleBinding_Role`
+    CONSTRAINT `fk_Auth0ScopeToRole_Role`
         FOREIGN KEY (`roleId`)
             REFERENCES `Role` (`id`)
             ON DELETE NO ACTION
