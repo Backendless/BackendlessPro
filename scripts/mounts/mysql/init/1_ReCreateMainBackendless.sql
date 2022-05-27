@@ -89,6 +89,7 @@ CREATE TABLE IF NOT EXISTS `main_backendless`.`ClusterZone` (
   `name` VARCHAR(255) NOT NULL,
   `domain` VARCHAR(255) NOT NULL,
   `apiUrl` varchar(255) NOT NULL DEFAULT 'http://localhost:9000',
+  `billingUrl` varchar(255) NULL,
   `description` TEXT NULL,
   `iconURL` VARCHAR(500),
   PRIMARY KEY (`id`))
