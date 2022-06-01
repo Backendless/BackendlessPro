@@ -1,6 +1,6 @@
 USE `main_backendless`;
 
-INSERT INTO `Version` (`main`, `application`) values (60, 105);
+INSERT INTO `Version` (`main`, `application`) values (61, 106);
 
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('2', 'SUSPENDED');
@@ -65,6 +65,7 @@ INSERT INTO `DeveloperOperation` VALUES ('108','CREATE_BLUE_PRINT');
 INSERT INTO `DeveloperOperation` VALUES ('109','MODIFY_COLUMNS_VISIBILITY');
 INSERT INTO `DeveloperOperation` VALUES ('111','PUBLISH_UI_CONTAINERS');
 INSERT INTO DeveloperOperation VALUES ('112','ENABLE_PANIC');
+INSERT INTO DeveloperOperation VALUES ('113','MANAGE_AUTH0_SECURITY');
 
 
 INSERT INTO `main_backendless`.`ClusterZone` VALUES (1, 'Main', 'Main Cluster', 'backendless.local', 'http://backendless.local:9000', null, null, null);
@@ -817,6 +818,48 @@ CREATE TABLE IF NOT EXISTS `OAuth1Provider`
     UNIQUE KEY `name_UNIQUE` (`name`),
     UNIQUE KEY `code_UNIQUE` (`code`)
     ) ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Auth0UserToUser`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Auth0UserToUser`
+(
+    `auth0UserId`     VARCHAR(100) NOT NULL,
+    `userId`          VARCHAR(100) NOT NULL,
+    PRIMARY KEY (`auth0UserId`, `userId`)
+) ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Auth0ScopeToRole`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Auth0ScopeToRole`
+(
+    `id`              VARCHAR(100) NOT NULL,
+    `roleId`          VARCHAR(100) NOT NULL,
+    `clientScope`     VARCHAR(255) NOT NULL,
+    `enabled`         BOOLEAN NOT NULL,
+    PRIMARY KEY (`id`),
+    CONSTRAINT `fk_Auth0ScopeToRole_Role`
+        FOREIGN KEY (`roleId`)
+            REFERENCES `Role` (`id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION
+) ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Auth0SecurityConfig`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Auth0SecurityConfig`
+(
+    `id`              VARCHAR(100) NOT NULL,
+    `certificate`     VARCHAR(2000),
+    `tenantDomain`    VARCHAR(255),
+    `enabled`         BOOLEAN NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
