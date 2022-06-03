@@ -1,6 +1,6 @@
 USE `main_backendless`;
 
-INSERT INTO `Version` (`main`, `application`) values (61, 106);
+INSERT INTO `Version` (`main`, `application`) values (62, 106);
 
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('2', 'SUSPENDED');
@@ -17,7 +17,6 @@ INSERT INTO `DeveloperOperation` VALUES ('14','CHANGE_LIMIT_NOTIFICATION');
 INSERT INTO `DeveloperOperation` VALUES ('17','CHANGE_LOG_CONFIG');
 INSERT INTO `DeveloperOperation` VALUES ('18','DELETE_LOGGERS');
 INSERT INTO `DeveloperOperation` VALUES ('19','CHANGE_LOG_INTEGRATIONS');
-INSERT INTO `DeveloperOperation` VALUES ('20','ADD_UPDATE_CREDIT_CARD');
 INSERT INTO `DeveloperOperation` VALUES ('21','CHANGE_BILLING_PLAN');
 INSERT INTO `DeveloperOperation` VALUES ('22','MARKETPLACE_PURCHASE');
 INSERT INTO `DeveloperOperation` VALUES ('23','MARKETPLACE_DELETE_PURCHASE');
