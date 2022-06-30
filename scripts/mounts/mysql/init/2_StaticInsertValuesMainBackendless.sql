@@ -65,6 +65,7 @@ INSERT INTO `DeveloperOperation` VALUES ('109','MODIFY_COLUMNS_VISIBILITY');
 INSERT INTO `DeveloperOperation` VALUES ('111','PUBLISH_UI_CONTAINERS');
 INSERT INTO DeveloperOperation VALUES ('112','ENABLE_PANIC');
 INSERT INTO DeveloperOperation VALUES ('113','MANAGE_AUTH0_SECURITY');
+INSERT INTO `DeveloperOperation` VALUES ('114','HIPAA_COMPLIANCE');
 
 
 INSERT INTO `main_backendless`.`ClusterZone` VALUES (1, 'Main', 'Main Cluster', 'backendless.local', 'http://backendless.local:9000', null, null, null);
