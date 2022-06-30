@@ -365,12 +365,15 @@ CREATE TABLE `main_backendless`.`Flow` (
   `description` varchar(500) DEFAULT NULL,
   `firstElementId` varchar(100) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
-  `ownerDeveloperId` varchar(36) NOT NULL,
+  `accountId` VARCHAR(100) NOT NULL,
+  `zoneId` int NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `fk_Flow_FirstElement` (`firstElementId`),
-  KEY `fk_Flow_Developer` (`ownerDeveloperId`),
+  KEY `fk_Flow_AutomationAccount_Idx` (`accountId`),
+  KEY `fk_Flow_ClusterZone_idx` (`zoneId`),
   CONSTRAINT `fk_Flow_FirstElement` FOREIGN KEY (`firstElementId`) REFERENCES `main_backendless`.`FlowElement` (`id`),
-  CONSTRAINT `fk_Flow_Developer` FOREIGN KEY (`ownerDeveloperId`) REFERENCES `main_backendless`.`Developer` (`id`)
+  CONSTRAINT `fk_Flow_has_AutomationAccount` FOREIGN KEY (`accountId`) REFERENCES `AutomationAccount` (`id`),
+  CONSTRAINT `fk_Flow_has_ClusterZone` FOREIGN KEY (`zoneId`) REFERENCES `ClusterZone` (`id`)
 ) ENGINE=InnoDB;
 
 
@@ -449,6 +452,51 @@ CREATE TABLE `main_backendless`.`FlowElementToFlowElement` (
   CONSTRAINT `fk_FlowElement_has_FlowElement_child` FOREIGN KEY (`childId`) REFERENCES `main_backendless`.`FlowElement` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `main_backendless`.`AutomationAccount`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `main_backendless`.`AutomationAccount` ;
+
+CREATE TABLE `main_backendless`.`AutomationAccount`
+(
+    `id`               varchar(100) NOT NULL,
+    `name`             varchar(100) NOT NULL,
+    `ownerDeveloperId` varchar(100) NOT NULL,
+    `subscriptionId`   varchar(100) DEFAULT NULL,
+    `zoneId`           int NOT NULL DEFAULT 1,
+    PRIMARY KEY (`id`),
+    KEY `fk_AutomationAccount_ClusterZone_idx` (`zoneId`),
+    CONSTRAINT `fk_AutomationAccount_ClusterZone`
+        FOREIGN KEY (`zoneId`)
+            REFERENCES `ClusterZone` (`id`)
+            ON DELETE NO ACTION
+            ON UPDATE NO ACTION
+) ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `main_backendless`.`AutomationAccountToDeveloper`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `main_backendless`.`AutomationAccountToDeveloper` ;
+
+CREATE TABLE IF NOT EXISTS `main_backendless`.`AutomationAccountToDeveloper` (
+  `accountId` VARCHAR(100) NOT NULL,
+  `developerId` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`developerId`,`accountId`),
+  INDEX `fk_AutomationAccount_has_Developer_Developer_idx` (`developerId` ASC),
+  INDEX `fk_AutomationAccount_has_Developer_AutomationAccount_idx` (`accountId` ASC),
+  CONSTRAINT `fk_AutomationAccount_has_Developer_AutomationAccount`
+    FOREIGN KEY (`accountId`)
+    REFERENCES `main_backendless`.`AutomationAccount` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_AutomationAccount_has_Developer_Developer`
+    FOREIGN KEY (`developerId`)
+    REFERENCES `main_backendless`.`Developer` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
