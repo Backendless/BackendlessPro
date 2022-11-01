@@ -19,11 +19,17 @@ For example you would like to have `dev.my-domain.com` as a domain for the backe
 If you would like to use IP for example `10.0.3.16` and port `31900` then you should put the following value: `http://10.0.3.16:31900`
 
 ### <a name="mysql_conf">Mysql connection configuration</a>
-
+You have to change at least two sections. It can be one MySql instance for both sections with the same user and password. 
+#### General
 - go to `http://<consul-host>/ui/#/dc1/kv/config/connection/main/host/edit` and provide a domain or IP address of mysql 
 - go to `http://<consul-host>/ui/#/dc1/kv/config/connection/main/port/edit` and provide port, default value is 3306
 - go to `http://<consul-host>/ui/#/dc1/kv/config/connection/main/user/edit` and provide mysql user
 - go to `http://<consul-host>/ui/#/dc1/kv/config/connection/main/password/edit` and provide password for the user
+#### Connection for quartz 
+- go to `http://<consul-host>/ui/#/dc1/kv/config/quartz/org/quartz/dataSource/myDS/URL/edit` and change `bl-mysql` to your host and change port `3306` to your port 
+- go to `http://<consul-host>/ui/#/dc1/kv/config/quartz/org/quartz/dataSource/myDS/user/edit` and provide mysql user 
+- go to `http://<consul-host>/ui/#/dc1/kv/config/quartz/org/quartz/dataSource/myDS/password/edit` and provide password for the user 
+
 
 ### <a name="redis_conf">Redis connection configuration</a>
 
