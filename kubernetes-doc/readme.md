@@ -6,7 +6,7 @@ Before setup services, install and configure following applications:
 
 - [mysql setup](mysql.md)
 
-- redis 4+ redis should be configured with `KEA` https://redis.io/topics/notifications
+- redis 6+ redis should be configured with `KEA` https://redis.io/topics/notifications
 ```
 notify-keyspace-events KEA
 ```
