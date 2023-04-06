@@ -1,6 +1,8 @@
 # Backendless Pro
 This is a repo for the distribution of Backendless Pro - the self-hosted version of the product. Backendless Pro is a complete technology stack, it includes all Backendless features without any limitations whatsoever. Backendless Pro is based on the docker architecture and thus can run in any environment supported by Docker. Backendless Pro consists of multiple components, such as a web server, the database, application engine, etc. Each component runs as a separate docker image thus allowing for horizontal scalability of each type of component. All Backendless docker images are published into [DockerHub](https://hub.docker.com/u/backendless/).
 
+You may also want to try new Backendless Pro Manager https://github.com/Backendless/pro-manager
+
 ## Prerequisites
 - [x] Download, install and run Docker. Backendless Pro has been tested with Docker installation on Linux and Mac OS X.
 - [x] Make sure your computer has at least 4GB of operating memory and at least 2GB of hard drive space

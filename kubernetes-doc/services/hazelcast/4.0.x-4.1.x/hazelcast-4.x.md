@@ -4,7 +4,7 @@ To start `bl-hazelcast` we should configure hazelcast kubernetes plugin.
 
 We suggest to use `Kubernetes API` discovery mode. Follow the instructions below to set up your environment  
 
-Checkout the doc https://github.com/hazelcast/hazelcast-code-samples/tree/4.0.1/hazelcast-integration/kubernetes
+Checkout the doc https://github.com/hazelcast/hazelcast-code-samples/tree/v4.0.1/hazelcast-integration/kubernetes
 
 1. Grant Permissions to use Kubernetes API: 
 

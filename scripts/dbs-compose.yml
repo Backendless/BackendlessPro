@@ -14,7 +14,7 @@ services:
     - bkndls-net
 
   bl-redis-debug:
-    image: redis:4
+    image: redis:6
     hostname: bl-redis-debug
     command: ["redis-server", "--appendonly", "yes", "--port", "${BL_PROPERTY_config_redis_bl_debug_port}"]
     ports:
