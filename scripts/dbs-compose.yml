@@ -3,7 +3,7 @@ version: '3.6'
 services:
 
   bl-redis:
-    image: redis:4
+    image: redis:6
     hostname: bl-redis
     command: ["redis-server", "--appendonly", "yes"]
     ports:
@@ -30,7 +30,7 @@ services:
     environment:
     - MYSQL_ROOT_PASSWORD=rootpassword
     - MYSQL_ROOT_HOST=%
-    command: --lower_case_table_names=0 --sql-mode=""
+    command: --sql-mode=""
 
     ports:
     - "${BL_MYSQL_PORT}:3306"
