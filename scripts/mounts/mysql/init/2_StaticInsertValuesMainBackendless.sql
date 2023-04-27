@@ -1,6 +1,6 @@
 USE `main_backendless`;
 
-INSERT INTO `Version` (`main`, `application`) values (66, 106);
+INSERT INTO `Version` (`main`, `application`) values (67, 106);
 
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('2', 'SUSPENDED');
@@ -67,6 +67,17 @@ INSERT INTO DeveloperOperation VALUES ('112','ENABLE_PANIC');
 INSERT INTO DeveloperOperation VALUES ('113','MANAGE_AUTH0_SECURITY');
 INSERT INTO `DeveloperOperation` VALUES ('114','HIPAA_COMPLIANCE');
 INSERT INTO `DeveloperOperation` VALUES ('115','DELETE_AUDIT_LOGS');
+
+
+INSERT INTO `DeveloperWorkspaceOperation` VALUES ('1','INVITE_REMOVE_TEAM_MEMBER');
+INSERT INTO `DeveloperWorkspaceOperation` VALUES ('2','ASSIGN_TEAM_MEMBER_PERMISSION');
+INSERT INTO `DeveloperWorkspaceOperation` VALUES ('3','DELETE_WORKSPACE');
+INSERT INTO `DeveloperWorkspaceOperation` VALUES ('4','RENAME_WORKSPACE');
+INSERT INTO `DeveloperWorkspaceOperation` VALUES ('5','CHANGE_LIMIT_NOTIFICATION');
+INSERT INTO `DeveloperWorkspaceOperation` VALUES ('6','CHANGE_BILLING_PLAN');
+INSERT INTO `DeveloperWorkspaceOperation` VALUES ('7','MARKETPLACE_PURCHASE');
+INSERT INTO `DeveloperWorkspaceOperation` VALUES ('8','MARKETPLACE_DELETE_PURCHASE');
+INSERT INTO `DeveloperWorkspaceOperation` VALUES ('9','CREATE_MODIFY_DELETE_FLOW');
 
 
 INSERT INTO `main_backendless`.`ClusterZone` VALUES (1, 'Main', 'Main Cluster', 'backendless.local', 'http://backendless.local:9000', null, null, null);

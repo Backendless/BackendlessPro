@@ -181,6 +181,18 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `main_backendless`.`DeveloperWorkspaceOperation`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `main_backendless`.`DeveloperWorkspaceOperation` ;
+
+CREATE TABLE IF NOT EXISTS `main_backendless`.`DeveloperWorkspaceOperation` (
+    `id` VARCHAR(100) NOT NULL,
+    `name` VARCHAR(45) NULL,
+    PRIMARY KEY (`id`))
+    ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `main_backendless`.`MailAction`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `main_backendless`.`MailAction` ;
@@ -275,6 +287,40 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `main_backendless`.`DeveloperWorkspacePermission`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `main_backendless`.`DeveloperWorkspacePermission` ;
+
+CREATE TABLE IF NOT EXISTS `main_backendless`.`DeveloperWorkspacePermission` (
+    `developerId` VARCHAR(100) NOT NULL,
+    `developerOperationId` VARCHAR(100) NOT NULL,
+    `workspaceId` VARCHAR(100) NOT NULL,
+    `permissionTypeId` VARCHAR(100) NOT NULL,
+    `visible` TINYINT(1) NOT NULL DEFAULT 1,
+    PRIMARY KEY (`developerId`,`developerOperationId`,`workspaceId`),
+    INDEX `fk_Dev_has_DevWorkspaceOperation_DevWorkspaceOperation1` (`developerOperationId` ASC),
+    INDEX `fk_Dev_has_DevWorkspaceOperation_Dev1` (`developerId` ASC),
+    INDEX `fk_DevWorkspacePermission_Workspace1_idx` (`workspaceId` ASC),
+
+    CONSTRAINT `fk_Dev_has_DevWorkspaceOperation_Dev1`
+    FOREIGN KEY (`developerId`)
+    REFERENCES `main_backendless`.`Developer` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION,
+    CONSTRAINT `fk_Dev_has_DevWorkspaceOperation_DevWorkspaceOperation1`
+    FOREIGN KEY (`developerOperationId`)
+    REFERENCES `main_backendless`.`DeveloperWorkspaceOperation` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    CONSTRAINT `fk_DevWorkspacePermission_Workspace1`
+    FOREIGN KEY (`workspaceId`)
+    REFERENCES `main_backendless`.`AutomationWorkspace` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `main_backendless`.`VisibilityGroupToDeveloper`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `main_backendless`.`VisibilityGroupToDeveloper` ;
@@ -301,6 +347,27 @@ CREATE TABLE IF NOT EXISTS `main_backendless`.`VisibilityGroupToDeveloper` (
 
 CREATE UNIQUE INDEX `visibilityGroup_UNIQUE` ON `main_backendless`.`VisibilityGroupToDeveloper` (`groupName`, `developerId`, `applicationId`, `zoneId`);
 
+
+-- -----------------------------------------------------
+-- Table `main_backendless`.`WorkspaceVisibilityGroupToDeveloper`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `main_backendless`.`WorkspaceVisibilityGroupToDeveloper` ;
+
+CREATE TABLE IF NOT EXISTS `main_backendless`.`WorkspaceVisibilityGroupToDeveloper` (
+    `developerId` VARCHAR(100) NOT NULL,
+    `groupName` VARCHAR(45) NOT NULL,
+    `workspaceId` VARCHAR(100) NOT NULL,
+    `visible` tinyint(1) NOT NULL DEFAULT 1,
+    PRIMARY KEY (`groupName`,`developerId`,`workspaceId`),
+    CONSTRAINT `fk_WorkspaceVisibilityGroup_AppToDeveloper`
+    FOREIGN KEY (`developerId`,`workspaceId`)
+    REFERENCES `main_backendless`.`AutomationWorkspaceToDeveloper` (`developerId`,`workspaceId`)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
+
+CREATE UNIQUE INDEX `workspaceVisibilityGroup_UNIQUE` ON `main_backendless`.`WorkspaceVisibilityGroupToDeveloper` (`groupName`, `developerId`, `workspaceId`);
 
 
 -- -----------------------------------------------------
