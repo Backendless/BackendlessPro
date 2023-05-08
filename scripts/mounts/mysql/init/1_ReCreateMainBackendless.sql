@@ -479,11 +479,6 @@ CREATE TABLE `main_backendless`.`FlowToApp` (
   `zoneId` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`flowId`,`applicationId`,`zoneId`),
   KEY `fk_Flow_has_Application_Flow_idx` (`flowId`),
-  KEY `fk_Flow_has_Application_Application_idx` (`applicationId`),
-  KEY `fk_Flow_has_Application_ClusterZone_idx` (`zoneId`),
-  KEY `fk_Flow_has_Application_Application` (`applicationId`,`zoneId`),
-  CONSTRAINT `fk_Flow_has_Application_Application` FOREIGN KEY (`applicationId`, `zoneId`) REFERENCES `main_backendless`.`Application` (`id`, `zoneId`) ON DELETE CASCADE,
-  CONSTRAINT `fk_Flow_has_Application_ClusterZone` FOREIGN KEY (`zoneId`) REFERENCES `main_backendless`.`ClusterZone` (`id`),
   CONSTRAINT `fk_Flow_has_Application_Flow` FOREIGN KEY (`flowId`) REFERENCES `main_backendless`.`Flow` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
@@ -535,16 +530,9 @@ CREATE TABLE IF NOT EXISTS `main_backendless`.`AutomationWorkspaceToDeveloper` (
   `workspaceId` VARCHAR(100) NOT NULL,
   `developerId` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`developerId`,`workspaceId`),
-  INDEX `fk_AutomationWorkspace_has_Developer_Developer_idx` (`developerId` ASC),
-  INDEX `fk_AutomationWorkspace_has_Developer_AutomationWorkspace_idx` (`workspaceId` ASC),
   CONSTRAINT `fk_AutomationWorkspace_has_Developer_AutomationWorkspace`
     FOREIGN KEY (`workspaceId`)
     REFERENCES `main_backendless`.`AutomationWorkspace` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_AutomationWorkspace_has_Developer_Developer`
-    FOREIGN KEY (`developerId`)
-    REFERENCES `main_backendless`.`Developer` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
