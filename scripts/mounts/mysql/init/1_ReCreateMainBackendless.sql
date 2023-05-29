@@ -91,6 +91,7 @@ CREATE TABLE IF NOT EXISTS `main_backendless`.`ClusterZone` (
   `apiUrl` varchar(255) NOT NULL DEFAULT 'http://localhost:9000',
   `billingUrl` varchar(255) NULL,
   `description` TEXT NULL,
+  `enabled` BOOLEAN DEFAULT TRUE,
   `iconURL` VARCHAR(500),
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
