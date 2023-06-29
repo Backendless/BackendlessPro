@@ -1429,6 +1429,23 @@ CREATE UNIQUE INDEX `context_UNIQUE` ON `InvocationChain` (`context` ASC, `event
 
 
 -- -----------------------------------------------------
+-- Table `InvocationChain`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `CacheControl`;
+
+CREATE TABLE `CacheControl` (
+	service varchar(25) NOT NULL,
+	target varchar(400) NOT NULL,
+	`options` varchar(150) NOT NULL,
+	max_age INT NOT NULL,
+	CONSTRAINT CacheControl_PK PRIMARY KEY (service,target)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_520_ci;
+
+
+-- -----------------------------------------------------
 -- function dist
 -- -----------------------------------------------------
 DROP function IF EXISTS `dist`;
