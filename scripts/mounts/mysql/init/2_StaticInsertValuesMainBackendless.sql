@@ -1,6 +1,6 @@
 USE `main_backendless`;
 
-INSERT INTO `Version` (`main`, `application`) values (69, 109);
+INSERT INTO `Version` (`main`, `application`) values (69, 110);
 
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('2', 'SUSPENDED');
@@ -1426,6 +1426,23 @@ CREATE TABLE IF NOT EXISTS `InvocationChain` (
 CREATE INDEX `fk_InvocationChain_EventBinding1_idx` ON `InvocationChain` (`handlerId` ASC);
 
 CREATE UNIQUE INDEX `context_UNIQUE` ON `InvocationChain` (`context` ASC, `eventId` ASC, `handlerId` ASC);
+
+
+-- -----------------------------------------------------
+-- Table `InvocationChain`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `CacheControl`;
+
+CREATE TABLE `CacheControl` (
+	service varchar(25) NOT NULL,
+	target varchar(400) NOT NULL,
+	`options` varchar(150) NOT NULL,
+	max_age INT NOT NULL,
+	CONSTRAINT CacheControl_PK PRIMARY KEY (service,target)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_520_ci;
 
 
 -- -----------------------------------------------------
