@@ -67,6 +67,7 @@ INSERT INTO DeveloperOperation VALUES ('112','ENABLE_PANIC');
 INSERT INTO DeveloperOperation VALUES ('113','MANAGE_AUTH0_SECURITY');
 INSERT INTO `DeveloperOperation` VALUES ('114','HIPAA_COMPLIANCE');
 INSERT INTO `DeveloperOperation` VALUES ('115','DELETE_AUDIT_LOGS');
+INSERT INTO `DeveloperOperation` VALUES ('116','CHANGE_CACHE_CONTROL');
 
 
 INSERT INTO `DeveloperWorkspaceOperation` VALUES ('1','INVITE_REMOVE_TEAM_MEMBER');
@@ -1429,16 +1430,17 @@ CREATE UNIQUE INDEX `context_UNIQUE` ON `InvocationChain` (`context` ASC, `event
 
 
 -- -----------------------------------------------------
--- Table `InvocationChain`
+-- Table `CacheControl`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `CacheControl`;
 
-CREATE TABLE `CacheControl` (
-	service varchar(25) NOT NULL,
-	target varchar(400) NOT NULL,
-	`options` varchar(150) NOT NULL,
-	max_age INT NOT NULL,
-	CONSTRAINT CacheControl_PK PRIMARY KEY (service,target)
+CREATE TABLE CacheControl (
+    service varchar(25) NOT NULL,
+    target varchar(400) NOT NULL,
+    `options` varchar(150) NOT NULL,
+    max_age INT NOT NULL,
+    CONSTRAINT CacheControl_PK PRIMARY KEY (service,target),
+    INDEX CacheControl_service_IDX USING BTREE (service)
 )
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
