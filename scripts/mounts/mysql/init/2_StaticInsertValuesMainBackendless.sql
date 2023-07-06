@@ -1,6 +1,6 @@
 USE `main_backendless`;
 
-INSERT INTO `Version` (`main`, `application`) values (69, 110);
+INSERT INTO `Version` (`main`, `application`) values (70, 111);
 
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('2', 'SUSPENDED');
@@ -1438,7 +1438,7 @@ CREATE TABLE CacheControl (
     service varchar(25) NOT NULL,
     target varchar(400) NOT NULL,
     `options` varchar(150) NOT NULL,
-    max_age INT NOT NULL,
+    maxAge INT NOT NULL,
     CONSTRAINT CacheControl_PK PRIMARY KEY (service,target),
     INDEX CacheControl_service_IDX USING BTREE (service)
 )
