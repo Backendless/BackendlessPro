@@ -1,6 +1,6 @@
 USE `main_backendless`;
 
-INSERT INTO `Version` (`main`, `application`) values (69, 109);
+INSERT INTO `Version` (`main`, `application`) values (70, 112);
 
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('2', 'SUSPENDED');
@@ -67,6 +67,7 @@ INSERT INTO DeveloperOperation VALUES ('112','ENABLE_PANIC');
 INSERT INTO DeveloperOperation VALUES ('113','MANAGE_AUTH0_SECURITY');
 INSERT INTO `DeveloperOperation` VALUES ('114','HIPAA_COMPLIANCE');
 INSERT INTO `DeveloperOperation` VALUES ('115','DELETE_AUDIT_LOGS');
+INSERT INTO `DeveloperOperation` VALUES ('116','CHANGE_CACHE_CONTROL');
 
 
 INSERT INTO `DeveloperWorkspaceOperation` VALUES ('1','INVITE_REMOVE_TEAM_MEMBER');
@@ -1426,6 +1427,24 @@ CREATE TABLE IF NOT EXISTS `InvocationChain` (
 CREATE INDEX `fk_InvocationChain_EventBinding1_idx` ON `InvocationChain` (`handlerId` ASC);
 
 CREATE UNIQUE INDEX `context_UNIQUE` ON `InvocationChain` (`context` ASC, `eventId` ASC, `handlerId` ASC);
+
+
+-- -----------------------------------------------------
+-- Table `CacheControl`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `CacheControl`;
+
+CREATE TABLE CacheControl (
+    service varchar(25) NOT NULL,
+    target varchar(400) NOT NULL,
+    `options` varchar(150) NOT NULL,
+    maxAge INT NOT NULL,
+    CONSTRAINT CacheControl_PK PRIMARY KEY (service,target),
+    INDEX CacheControl_service_IDX USING BTREE (service)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_520_ci;
 
 
 -- -----------------------------------------------------
