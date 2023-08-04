@@ -28,16 +28,9 @@ CREATE TABLE IF NOT EXISTS `main_backendless`.`Application` (
   `ownerDeveloperId` VARCHAR(36) NOT NULL,
   `dbReadonly` BOOLEAN NOT NULL DEFAULT false,
   `shardName` VARCHAR(100) NULL,
-  `zoneId` INT NOT NULL DEFAULT 1,
   `type` VARCHAR(30) NOT NULL DEFAULT 'general',
   `metaInfo` JSON NULL,
-  PRIMARY KEY (`id`,`zoneId`),
-  KEY `fk_Application_ClusterZone` (`zoneId`),
-  CONSTRAINT `fk_Application_ClusterZone`
-    FOREIGN KEY (`zoneId`)
-    REFERENCES `ClusterZone` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  PRIMARY KEY (`id`),
   UNIQUE INDEX `subscriptionId_UNIQUE` (`subscriptionId` ASC),
   UNIQUE INDEX `fpSubscriptionId_UNIQUE` (`fpSubscriptionId` ASC),
   UNIQUE INDEX `customerDomain_UNIQUE` (`customerDomain` ASC),
@@ -55,23 +48,16 @@ CREATE TABLE IF NOT EXISTS `main_backendless`.`AppCustomDomain` (
   `domain` VARCHAR(255) NOT NULL,
   `apiKeyId` VARCHAR(100) NOT NULL,
   `applicationId` VARCHAR(100) NOT NULL,
-  `zoneId` INT NOT NULL DEFAULT 1,
   `roleId` VARCHAR(100) NULL,
   `generated` BOOLEAN NOT NULL DEFAULT 0,
   `useSSL` BOOLEAN NOT NULL DEFAULT 0,
   `useForFileUrls` BOOLEAN NOT NULL DEFAULT 0,
   `webFolder` VARCHAR(100) NOT NULL DEFAULT 'web',
   PRIMARY KEY (`id`),
-  KEY `fk_AppCustomDomain_ClusterZone` (`zoneId`),
-  CONSTRAINT `fk_AppCustomDomain_ClusterZone`
-	FOREIGN KEY (`zoneId`)
-    REFERENCES `main_backendless`.`ClusterZone` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  KEY `fk_AppCustomDomain_Application` (`applicationId`,`zoneId`),
+  KEY `fk_AppCustomDomain_Application` (`applicationId`),
   CONSTRAINT `fk_AppCustomDomain_Application`
-	FOREIGN KEY (`applicationId`,`zoneId`)
-    REFERENCES `main_backendless`.`Application` (`id`,`zoneId`)
+	FOREIGN KEY (`applicationId`)
+    REFERENCES `main_backendless`.`Application` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   UNIQUE INDEX `domain_UNIQUE` (`domain` ASC))
@@ -146,25 +132,18 @@ DROP TABLE IF EXISTS `main_backendless`.`AppToDeveloper` ;
 CREATE TABLE IF NOT EXISTS `main_backendless`.`AppToDeveloper` (
   `applicationId` VARCHAR(100) NOT NULL,
   `developerId` VARCHAR(100) NOT NULL,
-  `zoneId` int NOT NULL DEFAULT 1,
-  PRIMARY KEY (`developerId`,`applicationId`,`zoneId`),
+  PRIMARY KEY (`developerId`,`applicationId`),
   INDEX `fk_Application_has_Developer_Developer1_idx` (`developerId` ASC),
   INDEX `fk_Application_has_Developer_Application_idx` (`applicationId` ASC),
-  INDEX `fk_Application_has_Developer_ClusterZone_idx` (`zoneId` ASC),
   CONSTRAINT `fk_Application_has_Developer_Application0`
-    FOREIGN KEY (`applicationId`, `zoneId`)
-    REFERENCES `main_backendless`.`Application` (`id`, `zoneId`)
+    FOREIGN KEY (`applicationId`)
+    REFERENCES `main_backendless`.`Application` (`id`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Application_has_Developer_Developer10`
     FOREIGN KEY (`developerId`)
     REFERENCES `main_backendless`.`Developer` (`id`)
     ON DELETE CASCADE
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Application_has_Developer_ClusterZone`
-    FOREIGN KEY (`zoneId`)
-    REFERENCES `main_backendless`.`ClusterZone` (`id`)
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -258,12 +237,10 @@ CREATE TABLE IF NOT EXISTS `main_backendless`.`DeveloperPermission` (
   `applicationId` VARCHAR(100) NOT NULL,
   `permissionTypeId` VARCHAR(100) NOT NULL,
   `visible` TINYINT(1) NOT NULL DEFAULT 1,
-  `zoneId` int NOT NULL DEFAULT 1,
-  PRIMARY KEY (`developerId`,`developerOperationId`,`applicationId`,`zoneId`),
+  PRIMARY KEY (`developerId`,`developerOperationId`,`applicationId`),
   INDEX `fk_Developer_has_DeveloperOperation_DeveloperOperation1` (`developerOperationId` ASC),
   INDEX `fk_Developer_has_DeveloperOperation_Developer1` (`developerId` ASC),
-  INDEX `fk_DeveloperPermission_Application1_idx` (`applicationId`, `zoneId` ASC),
-  INDEX `fk_DeveloperPermission_ClusterZone_idx` (`zoneId` ASC),
+  INDEX `fk_DeveloperPermission_Application1_idx` (`applicationId` ASC),
   CONSTRAINT `fk_Developer_has_DeveloperOperation_Developer1`
     FOREIGN KEY (`developerId`)
     REFERENCES `main_backendless`.`Developer` (`id`)
@@ -275,14 +252,9 @@ CREATE TABLE IF NOT EXISTS `main_backendless`.`DeveloperPermission` (
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_DeveloperPermission_Application1`
-    FOREIGN KEY (`applicationId`, `zoneId`)
-    REFERENCES `main_backendless`.`Application` (`id`, `zoneId`)
+    FOREIGN KEY (`applicationId`)
+    REFERENCES `main_backendless`.`Application` (`id`)
     ON DELETE CASCADE
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_DeveloperPermission_ClusterZone`
-    FOREIGN KEY (`zoneId`)
-    REFERENCES `main_backendless`.`ClusterZone` (`id`)
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -331,22 +303,15 @@ CREATE TABLE IF NOT EXISTS `main_backendless`.`VisibilityGroupToDeveloper` (
   `groupName` VARCHAR(45) NOT NULL,
   `applicationId` VARCHAR(100) NOT NULL,
   `visible` tinyint(1) NOT NULL DEFAULT 1,
-  `zoneId` int NOT NULL DEFAULT 1,
-  PRIMARY KEY (`groupName`,`developerId`,`applicationId`,`zoneId`),
-  INDEX `fk_VIsibilityGroup_has_Developer_ClusterZone_idx` (`zoneId` ASC),
+  PRIMARY KEY (`groupName`,`developerId`,`applicationId`),
   CONSTRAINT `fk_VisibilityGroup_AppToDeveloper`
-    FOREIGN KEY (`developerId`,`applicationId`,`zoneId`)
-    REFERENCES `main_backendless`.`AppToDeveloper` (`developerId`,`applicationId`,`zoneId`)
+    FOREIGN KEY (`developerId`,`applicationId`)
+    REFERENCES `main_backendless`.`AppToDeveloper` (`developerId`,`applicationId`)
     ON DELETE CASCADE
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_VIsibilityGroup_has_Developer_ClusterZone`
-    FOREIGN KEY (`zoneId`)
-    REFERENCES `ClusterZone` (`id`)
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `visibilityGroup_UNIQUE` ON `main_backendless`.`VisibilityGroupToDeveloper` (`groupName`, `developerId`, `applicationId`, `zoneId`);
+CREATE UNIQUE INDEX `visibilityGroup_UNIQUE` ON `main_backendless`.`VisibilityGroupToDeveloper` (`groupName`, `developerId`, `applicationId`);
 
 
 -- -----------------------------------------------------
@@ -434,14 +399,11 @@ CREATE TABLE `main_backendless`.`Flow` (
   `firstElementId` varchar(100) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `workspaceId` VARCHAR(100) NOT NULL,
-  `zoneId` int NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `fk_Flow_FirstElement` (`firstElementId`),
   KEY `fk_Flow_AutomationWorkspace_Idx` (`workspaceId`),
-  KEY `fk_Flow_ClusterZone_idx` (`zoneId`),
   CONSTRAINT `fk_Flow_FirstElement` FOREIGN KEY (`firstElementId`) REFERENCES `main_backendless`.`FlowElement` (`id`),
-  CONSTRAINT `fk_Flow_has_AutomationWorkspace` FOREIGN KEY (`workspaceId`) REFERENCES `AutomationWorkspace` (`id`),
-  CONSTRAINT `fk_Flow_has_ClusterZone` FOREIGN KEY (`zoneId`) REFERENCES `ClusterZone` (`id`)
+  CONSTRAINT `fk_Flow_has_AutomationWorkspace` FOREIGN KEY (`workspaceId`) REFERENCES `AutomationWorkspace` (`id`)
 ) ENGINE=InnoDB;
 
 
@@ -477,8 +439,7 @@ DROP TABLE IF EXISTS `main_backendless`.`FlowToApp` ;
 CREATE TABLE `main_backendless`.`FlowToApp` (
   `flowId` varchar(100) NOT NULL,
   `applicationId` varchar(100) NOT NULL,
-  `zoneId` int NOT NULL DEFAULT '1',
-  PRIMARY KEY (`flowId`,`applicationId`,`zoneId`),
+  PRIMARY KEY (`flowId`,`applicationId`),
   KEY `fk_Flow_has_Application_Flow_idx` (`flowId`),
   CONSTRAINT `fk_Flow_has_Application_Flow` FOREIGN KEY (`flowId`) REFERENCES `main_backendless`.`Flow` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
@@ -511,14 +472,7 @@ CREATE TABLE `main_backendless`.`AutomationWorkspace`
     `name`             varchar(100) NOT NULL,
     `ownerDeveloperId` varchar(100) NOT NULL,
     `subscriptionId`   varchar(100) DEFAULT NULL,
-    `zoneId`           int NOT NULL DEFAULT 1,
-    PRIMARY KEY (`id`),
-    KEY `fk_AutomationWorkspace_ClusterZone_idx` (`zoneId`),
-    CONSTRAINT `fk_AutomationWorkspace_ClusterZone`
-        FOREIGN KEY (`zoneId`)
-            REFERENCES `ClusterZone` (`id`)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
 
