@@ -1,6 +1,6 @@
 USE `main_backendless`;
 
-INSERT INTO `Version` (`main`, `application`) values (74, 112);
+INSERT INTO `Version` (`main`, `application`) values (75, 112);
 
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('2', 'SUSPENDED');
@@ -22,9 +22,7 @@ INSERT INTO `DeveloperOperation` VALUES ('23','MARKETPLACE_DELETE_PURCHASE');
 INSERT INTO `DeveloperOperation` VALUES ('24','EXPORT_APP');
 INSERT INTO `DeveloperOperation` VALUES ('25','IMPORT');
 INSERT INTO `DeveloperOperation` VALUES ('27','CLONE_APP');
-INSERT INTO `DeveloperOperation` VALUES ('29','MODIFY_LANDING_PAGE');
 INSERT INTO `DeveloperOperation` VALUES ('3','ASSIGN_TEAM_MEMBER_PERMISSION');
-INSERT INTO `DeveloperOperation` VALUES ('30','PUBLISH_LANDING_PAGE');
 INSERT INTO `DeveloperOperation` VALUES ('31','CHANGE_USER_REGISTRATION_PROPS');
 INSERT INTO `DeveloperOperation` VALUES ('32','CHANGE_LOGIN_PROPS');
 INSERT INTO `DeveloperOperation` VALUES ('33','EMAIL_TEMPLATE_ACCESS');
