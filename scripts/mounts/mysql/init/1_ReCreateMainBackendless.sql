@@ -400,6 +400,7 @@ CREATE TABLE `main_backendless`.`Flow` (
   `created` datetime DEFAULT NULL,
   `workspaceId` VARCHAR(100) NOT NULL,
   `statusId` tinyint NOT NULL,
+  `consoleMetaInfo` JSON NULL,
   PRIMARY KEY (`id`),
   KEY `fk_Flow_FirstElement` (`firstElementId`),
   KEY `fk_Flow_AutomationWorkspace_Idx` (`workspaceId`),
