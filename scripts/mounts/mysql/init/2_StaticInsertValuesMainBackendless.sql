@@ -1,6 +1,6 @@
 USE `main_backendless`;
 
-INSERT INTO `Version` (`main`, `application`) values (73, 112);
+INSERT INTO `Version` (`main`, `application`) values (76, 112);
 
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('2', 'SUSPENDED');
@@ -17,15 +17,12 @@ INSERT INTO `DeveloperOperation` VALUES ('14','CHANGE_LIMIT_NOTIFICATION');
 INSERT INTO `DeveloperOperation` VALUES ('17','CHANGE_LOG_CONFIG');
 INSERT INTO `DeveloperOperation` VALUES ('18','DELETE_LOGGERS');
 INSERT INTO `DeveloperOperation` VALUES ('19','CHANGE_LOG_INTEGRATIONS');
-INSERT INTO `DeveloperOperation` VALUES ('21','CHANGE_BILLING_PLAN');
 INSERT INTO `DeveloperOperation` VALUES ('22','MARKETPLACE_PURCHASE');
 INSERT INTO `DeveloperOperation` VALUES ('23','MARKETPLACE_DELETE_PURCHASE');
 INSERT INTO `DeveloperOperation` VALUES ('24','EXPORT_APP');
 INSERT INTO `DeveloperOperation` VALUES ('25','IMPORT');
 INSERT INTO `DeveloperOperation` VALUES ('27','CLONE_APP');
-INSERT INTO `DeveloperOperation` VALUES ('29','MODIFY_LANDING_PAGE');
 INSERT INTO `DeveloperOperation` VALUES ('3','ASSIGN_TEAM_MEMBER_PERMISSION');
-INSERT INTO `DeveloperOperation` VALUES ('30','PUBLISH_LANDING_PAGE');
 INSERT INTO `DeveloperOperation` VALUES ('31','CHANGE_USER_REGISTRATION_PROPS');
 INSERT INTO `DeveloperOperation` VALUES ('32','CHANGE_LOGIN_PROPS');
 INSERT INTO `DeveloperOperation` VALUES ('33','EMAIL_TEMPLATE_ACCESS');
@@ -75,7 +72,6 @@ INSERT INTO `DeveloperWorkspaceOperation` VALUES ('2','ASSIGN_TEAM_MEMBER_PERMIS
 INSERT INTO `DeveloperWorkspaceOperation` VALUES ('3','DELETE_WORKSPACE');
 INSERT INTO `DeveloperWorkspaceOperation` VALUES ('4','RENAME_WORKSPACE');
 INSERT INTO `DeveloperWorkspaceOperation` VALUES ('5','CHANGE_LIMIT_NOTIFICATION');
-INSERT INTO `DeveloperWorkspaceOperation` VALUES ('6','CHANGE_BILLING_PLAN');
 INSERT INTO `DeveloperWorkspaceOperation` VALUES ('7','MARKETPLACE_PURCHASE');
 INSERT INTO `DeveloperWorkspaceOperation` VALUES ('8','MARKETPLACE_DELETE_PURCHASE');
 INSERT INTO `DeveloperWorkspaceOperation` VALUES ('9','CREATE_MODIFY_DELETE_FLOW');
