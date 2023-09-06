@@ -1,6 +1,6 @@
 USE `main_backendless`;
 
-INSERT INTO `Version` (`main`, `application`) values (75, 112);
+INSERT INTO `Version` (`main`, `application`) values (76, 112);
 
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('2', 'SUSPENDED');
