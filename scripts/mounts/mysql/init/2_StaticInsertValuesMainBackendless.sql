@@ -1,6 +1,6 @@
 USE `main_backendless`;
 
-INSERT INTO `Version` (`main`, `application`) values (77, 113);
+INSERT INTO `Version` (`main`, `application`) values (78, 114);
 
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('2', 'SUSPENDED');
@@ -65,6 +65,7 @@ INSERT INTO DeveloperOperation VALUES ('113','MANAGE_AUTH0_SECURITY');
 INSERT INTO `DeveloperOperation` VALUES ('114','HIPAA_COMPLIANCE');
 INSERT INTO `DeveloperOperation` VALUES ('115','DELETE_AUDIT_LOGS');
 INSERT INTO `DeveloperOperation` VALUES ('116','CHANGE_CACHE_CONTROL');
+INSERT INTO `DeveloperOperation` VALUES ('117','CREATE_MODIFY_DELETE_FLOW');
 
 
 INSERT INTO `DeveloperWorkspaceOperation` VALUES ('1','INVITE_REMOVE_TEAM_MEMBER');
