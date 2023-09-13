@@ -1,6 +1,6 @@
 USE `main_backendless`;
 
-INSERT INTO `Version` (`main`, `application`) values (77, 112);
+INSERT INTO `Version` (`main`, `application`) values (77, 113);
 
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('2', 'SUSPENDED');
@@ -1438,9 +1438,41 @@ CREATE TABLE CacheControl (
     CONSTRAINT CacheControl_PK PRIMARY KEY (service,target),
     INDEX CacheControl_service_IDX USING BTREE (service)
 )
-ENGINE=InnoDB
-DEFAULT CHARSET=utf8mb4
-COLLATE=utf8mb4_unicode_520_ci;
+ENGINE=InnoDB;
+
+-- -----------------------------------------------------
+-- Table `ExternalSqlConnection`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS ExternalSqlConnection;
+CREATE TABLE ExternalSqlConnection
+(
+    `id`             VARCHAR(36) NOT NULL,
+    `name`           VARCHAR(100) NULL,
+    `connectionInfo` JSON NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `name_UNIQUE` (`name` ASC)
+)
+ENGINE=InnoDB;
+
+-- -----------------------------------------------------
+-- Table `ExternalSqlQuery`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS ExternalSqlQuery;
+CREATE TABLE ExternalSqlQuery
+(
+    `id`                      VARCHAR(36)  NOT NULL,
+    `name`                    VARCHAR(100) NOT NULL,
+    `externalSqlConnectionId` VARCHAR(36)  NOT NULL,
+    `queryInfo`               JSON NULL,
+    PRIMARY KEY (`id`),
+    CONSTRAINT `fk_ExternalSqlConnection_id`
+        FOREIGN KEY (`externalSqlConnectionId`)
+            REFERENCES `ExternalSqlConnection` (`id`)
+            ON DELETE CASCADE
+            ON UPDATE NO ACTION,
+    UNIQUE INDEX `name_UNIQUE` (`externalSqlConnectionId`,`name` ASC)
+)
+ENGINE=InnoDB;
 
 
 -- -----------------------------------------------------
