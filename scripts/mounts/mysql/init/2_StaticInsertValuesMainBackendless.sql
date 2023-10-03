@@ -1477,6 +1477,72 @@ ENGINE=InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `Flow`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Flow`;
+
+CREATE TABLE `Flow`
+(
+    `id`              varchar(100) NOT NULL,
+    `name`            varchar(100) NOT NULL,
+    `description`     varchar(500) DEFAULT NULL,
+    `firstElementId`  varchar(100) DEFAULT NULL,
+    `created`         datetime     DEFAULT NULL,
+    `statusId`        tinyint      NOT NULL,
+    `flowGroupId`     VARCHAR(100) NOT NULL,
+    `version`         VARCHAR(255) NOT NULL,
+    `sourceVersion`   VARCHAR(255) NULL,
+    `consoleMetaInfo` JSON         NULL,
+    PRIMARY KEY (`id`),
+    KEY `fk_Flow_FirstElement` (`firstElementId`),
+    UNIQUE INDEX `Flow_flowGroupId_version_unique_index` (flowGroupId, version),
+    CONSTRAINT `fk_Flow_FirstElement` FOREIGN KEY (`firstElementId`) REFERENCES `FlowElement` (`id`)
+) ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FlowElement`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `FlowElement`;
+
+CREATE TABLE `FlowElement`
+(
+    `id`              varchar(100) NOT NULL,
+    `typeId`          int          NOT NULL,
+    `name`            varchar(100) NOT NULL,
+    `description`     varchar(500) DEFAULT NULL,
+    `flowId`          varchar(100) NOT NULL,
+    `groupId`         varchar(100) NULL,
+    `metaInfo`        JSON         NULL,
+    `consoleMetaInfo` JSON         NULL,
+    `created`         datetime     DEFAULT NULL,
+    `updated`         datetime     DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `fk_FlowElement_Flow` (`flowId`),
+    KEY `fk_FlowElement_FlowGroup` (`groupId`),
+    CONSTRAINT `fk_FlowElement_Flow` FOREIGN KEY (`flowId`) REFERENCES `Flow` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_FlowElement_FlowGroup` FOREIGN KEY (`groupId`) REFERENCES `FlowElement` (`id`) ON DELETE CASCADE
+) ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FlowElementToFlowElement`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `FlowElementToFlowElement` ;
+
+CREATE TABLE `FlowElementToFlowElement`
+(
+    `parentId` varchar(100) NOT NULL,
+    `childId`  varchar(100) NOT NULL,
+    PRIMARY KEY (`parentId`, `childId`),
+    KEY `fk_FlowElement_has_FlowElement_parent_idx` (`parentId`),
+    KEY `fk_FlowElement_has_FlowElement_child_idx` (`childId`),
+    CONSTRAINT `fk_FlowElement_has_FlowElement_parent` FOREIGN KEY (`parentId`) REFERENCES `FlowElement` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_FlowElement_has_FlowElement_child` FOREIGN KEY (`childId`) REFERENCES `FlowElement` (`id`) ON DELETE CASCADE
+) ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- function dist
 -- -----------------------------------------------------
 DROP function IF EXISTS `dist`;
