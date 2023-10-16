@@ -1,6 +1,6 @@
 USE `main_backendless`;
 
-INSERT INTO `Version` (`main`, `application`) values (76, 112);
+INSERT INTO `Version` (`main`, `application`) values (78, 116);
 
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('2', 'SUSPENDED');
@@ -65,6 +65,7 @@ INSERT INTO DeveloperOperation VALUES ('113','MANAGE_AUTH0_SECURITY');
 INSERT INTO `DeveloperOperation` VALUES ('114','HIPAA_COMPLIANCE');
 INSERT INTO `DeveloperOperation` VALUES ('115','DELETE_AUDIT_LOGS');
 INSERT INTO `DeveloperOperation` VALUES ('116','CHANGE_CACHE_CONTROL');
+INSERT INTO `DeveloperOperation` VALUES ('117','CREATE_MODIFY_DELETE_FLOW');
 
 
 INSERT INTO `DeveloperWorkspaceOperation` VALUES ('1','INVITE_REMOVE_TEAM_MEMBER');
@@ -1438,9 +1439,107 @@ CREATE TABLE CacheControl (
     CONSTRAINT CacheControl_PK PRIMARY KEY (service,target),
     INDEX CacheControl_service_IDX USING BTREE (service)
 )
-ENGINE=InnoDB
-DEFAULT CHARSET=utf8mb4
-COLLATE=utf8mb4_unicode_520_ci;
+ENGINE=InnoDB;
+
+-- -----------------------------------------------------
+-- Table `ExternalSqlConnection`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS ExternalSqlConnection;
+CREATE TABLE ExternalSqlConnection
+(
+    `id`             VARCHAR(36) NOT NULL,
+    `name`           VARCHAR(100) NULL,
+    `connectionInfo` JSON NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE INDEX `name_UNIQUE` (`name` ASC)
+)
+ENGINE=InnoDB;
+
+-- -----------------------------------------------------
+-- Table `ExternalSqlQuery`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS ExternalSqlQuery;
+CREATE TABLE ExternalSqlQuery
+(
+    `id`                      VARCHAR(36)  NOT NULL,
+    `name`                    VARCHAR(100) NOT NULL,
+    `externalSqlConnectionId` VARCHAR(36)  NOT NULL,
+    `queryInfo`               JSON NULL,
+    PRIMARY KEY (`id`),
+    CONSTRAINT `fk_ExternalSqlConnection_id`
+        FOREIGN KEY (`externalSqlConnectionId`)
+            REFERENCES `ExternalSqlConnection` (`id`)
+            ON DELETE CASCADE
+            ON UPDATE NO ACTION,
+    UNIQUE INDEX `name_UNIQUE` (`externalSqlConnectionId`,`name` ASC)
+)
+ENGINE=InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Flow`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `Flow`;
+
+CREATE TABLE `Flow`
+(
+    `id`              varchar(100) NOT NULL,
+    `name`            varchar(100) NOT NULL,
+    `description`     varchar(500) DEFAULT NULL,
+    `firstElementId`  varchar(100) DEFAULT NULL,
+    `created`         datetime     DEFAULT NULL,
+    `statusId`        tinyint      NOT NULL,
+    `flowGroupId`     VARCHAR(100) NOT NULL,
+    `version`         VARCHAR(255) NOT NULL,
+    `sourceVersion`   VARCHAR(255) NULL,
+    `consoleMetaInfo` JSON         NULL,
+    PRIMARY KEY (`id`),
+    KEY `fk_Flow_FirstElement` (`firstElementId`),
+    UNIQUE INDEX `Flow_flowGroupId_version_unique_index` (flowGroupId, version),
+    CONSTRAINT `fk_Flow_FirstElement` FOREIGN KEY (`firstElementId`) REFERENCES `FlowElement` (`id`)
+) ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FlowElement`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `FlowElement`;
+
+CREATE TABLE `FlowElement`
+(
+    `id`              varchar(100) NOT NULL,
+    `typeId`          int          NOT NULL,
+    `name`            varchar(100) NOT NULL,
+    `description`     varchar(500) DEFAULT NULL,
+    `flowId`          varchar(100) NOT NULL,
+    `groupId`         varchar(100) NULL,
+    `metaInfo`        JSON         NULL,
+    `consoleMetaInfo` JSON         NULL,
+    `created`         datetime     DEFAULT NULL,
+    `updated`         datetime     DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `fk_FlowElement_Flow` (`flowId`),
+    KEY `fk_FlowElement_FlowGroup` (`groupId`),
+    CONSTRAINT `fk_FlowElement_Flow` FOREIGN KEY (`flowId`) REFERENCES `Flow` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_FlowElement_FlowGroup` FOREIGN KEY (`groupId`) REFERENCES `FlowElement` (`id`) ON DELETE CASCADE
+) ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `FlowElementToFlowElement`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `FlowElementToFlowElement` ;
+
+CREATE TABLE `FlowElementToFlowElement`
+(
+    `parentId` varchar(100) NOT NULL,
+    `childId`  varchar(100) NOT NULL,
+    PRIMARY KEY (`parentId`, `childId`),
+    KEY `fk_FlowElement_has_FlowElement_parent_idx` (`parentId`),
+    KEY `fk_FlowElement_has_FlowElement_child_idx` (`childId`),
+    CONSTRAINT `fk_FlowElement_has_FlowElement_parent` FOREIGN KEY (`parentId`) REFERENCES `FlowElement` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_FlowElement_has_FlowElement_child` FOREIGN KEY (`childId`) REFERENCES `FlowElement` (`id`) ON DELETE CASCADE
+) ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
