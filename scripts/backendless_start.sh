@@ -1,10 +1,12 @@
 #!/bin/bash
+echo "This way of installation is deprecated. Please use Pro Manager instead https://github.com/Backendless/pro-manager "
+exit 0
 
 echo Usage:
 echo "`basename "$0"`  <version>  <mode>"
 echo "<version> -- version from the docker registry"
 echo "<mode> -- [cloud|managed|pro] -- default=pro"
-echo 
+echo
 
 
 cd `dirname "$0"`;

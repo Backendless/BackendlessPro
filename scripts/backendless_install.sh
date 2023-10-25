@@ -1,5 +1,7 @@
 #!/bin/bash
-  
+echo "This way of installation is deprecated. Please use Pro Manager instead https://github.com/Backendless/pro-manager "
+exit 0
+
 echo "Usage: \"`basename "$0"` <version>"
 
 cd `dirname "$0"`;
