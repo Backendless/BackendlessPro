@@ -1,8 +1,8 @@
 # Deprecated. Use [PRO-Manager](https://github.com/Backendless/pro-manager)
-# Backendless Pro
-This is a repo for the distribution of Backendless Pro - the self-hosted version of the product. Backendless Pro is a complete technology stack, it includes all Backendless features without any limitations whatsoever. Backendless Pro is based on the docker architecture and thus can run in any environment supported by Docker. Backendless Pro consists of multiple components, such as a web server, the database, application engine, etc. Each component runs as a separate docker image thus allowing for horizontal scalability of each type of component. All Backendless docker images are published into [DockerHub](https://hub.docker.com/u/backendless/).
+<details>
+  <summary>Backendless Pro</summary>
 
-You may also want to try new Backendless Pro Manager https://github.com/Backendless/pro-manager
+This is a repo for the distribution of Backendless Pro - the self-hosted version of the product. Backendless Pro is a complete technology stack, it includes all Backendless features without any limitations whatsoever. Backendless Pro is based on the docker architecture and thus can run in any environment supported by Docker. Backendless Pro consists of multiple components, such as a web server, the database, application engine, etc. Each component runs as a separate docker image thus allowing for horizontal scalability of each type of component. All Backendless docker images are published into [DockerHub](https://hub.docker.com/u/backendless/).
 
 ## Prerequisites
 - [x] Download, install and run Docker. Backendless Pro has been tested with Docker installation on Linux and Mac OS X.
@@ -53,3 +53,4 @@ To get started:
 1. You will see the Backendless Console login screen:
 ![Backendless Login](images/BELPro_Login.png)
 1. Since this is the first time you access your installation, you will need to create a developer/admin account. To do that, click the **Create Account** link and fill out the registration form. This will create a Backendless account for your installation. The confirmation page will say that an email is sent to your email address, ignore it and return to the login form (which is accessible at the installation's URL `http://localhost:[PORT]`) and login to your account using the registration credentials.     
+</details>
