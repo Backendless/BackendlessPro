@@ -1,6 +1,6 @@
 USE `main_backendless`;
 
-INSERT INTO `Version` (`main`, `application`) values (78, 116);
+INSERT INTO `Version` (`main`, `application`) values (79, 120);
 
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `DeveloperStatus` (`id`, `name`) VALUES ('2', 'SUSPENDED');
@@ -1194,10 +1194,11 @@ CREATE TABLE IF NOT EXISTS `LocalService` (
     `internalOnly` TINYINT(1) NOT NULL DEFAULT 1,
     `modelName` VARCHAR(45) NOT NULL,
     `mode` INT NOT NULL,
+    `defaultModel` TINYINT(1) NOT NULL DEFAULT 1,
     PRIMARY KEY (`id`))
     ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `name_UNIQUE` ON `LocalService` (`name` ASC, `mode` ASC);
+CREATE UNIQUE INDEX `name_UNIQUE` ON `LocalService` (`name` ASC, `modelName` ASC, `mode` ASC);
 
 
 -- -----------------------------------------------------
